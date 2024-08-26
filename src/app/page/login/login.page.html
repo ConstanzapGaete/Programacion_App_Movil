@@ -1,0 +1,50 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Skeleton APP
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column;">
+    <img src="/assets/img/img1.gif" alt="Logo" style="max-width: 100%; height: auto; margin-bottom: 10px;">
+    <ion-grid style="max-width: 400px; width: 100%;">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input type="text" [(ngModel)]="username"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" expand="block" style="max-width: 400px;" (click)="validateLogin()">
+            Iniciar Sesión
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button [routerLink]="['/new-account']" color="secondary" expand="block" style="max-width: 400px;">
+            Registrarse
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p style="text-align: center; color: red;">{{ message }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
