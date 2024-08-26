@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-login',
@@ -35,15 +36,29 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home'], navigationExtras);
     } else {
       this.message = 'Login erroneo';
+      this.username='';
+      this.password='';
     }
   }
 
-  clearFields() {
-    this.username = '';
-    this.password = '';
-  }
   
   ngOnInit() {
-    this.clearFields();
-  }
+    
+    Keyboard.addListener('keyboardWillShow', (info) => {
+        document.querySelector('ion-content')?.setAttribute('style', `padding-bottom: ${info.keyboardHeight}px`);
+      });
+  
+      Keyboard.addListener('keyboardWillHide', () => {
+        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
+      });
+    }
+  
+    adjustForKeyboard(show: boolean) {
+      if (show) {
+        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 250px');
+      } else {
+        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
+      }
+    }
+  
 }
