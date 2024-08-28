@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewAccountPage implements OnInit {
 
+  birthday: string | null = null;
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

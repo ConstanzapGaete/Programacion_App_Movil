@@ -11,7 +11,6 @@ import { Keyboard } from '@capacitor/keyboard';
 export class LoginPage implements OnInit {
   username!: string;
   password!: string;
-  message!: string;
   
   constructor(private router: Router, private alertController: AlertController) {}
 
@@ -35,30 +34,32 @@ export class LoginPage implements OnInit {
       };
       this.router.navigate(['/home'], navigationExtras);
     } else {
-      this.message = 'Login erroneo';
-      this.username='';
-      this.password='';
+      const alert = await this.alertController.create({
+        header: 'Error de Login',
+        message: 'Usuario o contraseña incorrectos.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      this.username = '';
+      this.password = '';
     }
   }
 
-  
   ngOnInit() {
-    
     Keyboard.addListener('keyboardWillShow', (info) => {
-        document.querySelector('ion-content')?.setAttribute('style', `padding-bottom: ${info.keyboardHeight}px`);
-      });
-  
-      Keyboard.addListener('keyboardWillHide', () => {
-        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
-      });
+      document.querySelector('ion-content')?.setAttribute('style', `padding-bottom: ${info.keyboardHeight}px`);
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
+    });
+  }
+
+  adjustForKeyboard(show: boolean) {
+    if (show) {
+      document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 250px');
+    } else {
+      document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
     }
-  
-    adjustForKeyboard(show: boolean) {
-      if (show) {
-        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 250px');
-      } else {
-        document.querySelector('ion-content')?.setAttribute('style', 'padding-bottom: 0px');
-      }
-    }
-  
+  }
 }

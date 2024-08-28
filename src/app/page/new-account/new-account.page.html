@@ -10,4 +10,40 @@
       <ion-title size="large">Nueva Cuenta</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Fecha de Nacimiento" [(ngModel)]="birthday" readonly></ion-input>
+      <ion-button fill="clear" id="open-datetime">
+        <ion-icon slot="icon-only" name="calendar"></ion-icon>
+      </ion-button>
+      <ion-popover trigger="open-datetime" triggerAction="click">
+        <ng-template>
+          <ion-datetime [(ngModel)]="birthday" locale="es-ES"
+            [showDefaultButtons]="true" presentation="date">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+      <ion-title size="small">App desarrollada x Xicaraptor</ion-title>
+      <ion-buttons slot="start">
+        <ion-button [routerLink]="['/login']">
+          <ion-icon slot="icon-only" name="log-in"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
